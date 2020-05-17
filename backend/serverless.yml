@@ -1,0 +1,85 @@
+service: operation-feuertaufe
+plugins:
+  - serverless-webpack
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-central-1
+  logRetentionInDays: 1
+
+  environment:
+    TABLE_NAME: operation-feuertaufe-${self:provider.stage}
+
+  apiKeys:
+    - name: operation-feuertaufe-${self:provider.stage}
+      value: ${self:custom.file.API_KEY}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cloudwatch:*
+        - logs:*
+        - "s3:ListBucket"
+        - "s3:PutObject"
+        - "ssm:GetParameters"
+        - "s3:GetObject"
+        - "lambda:InvokeFunction"
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "*"
+
+package:
+  individually: false
+  excludeDevDependencies: true
+
+resources: # CloudFormation template syntax from here on.
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: operation-feuertaufe-${self:provider.stage}
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js" # Name of webpack configuration file
+    includeModules:
+      forceInclude:
+        - pino-pretty
+    packager: "npm" # Packager that will be used to package your external modules
+
+functions:
+  postData:
+    handler: src/functions/dataService.postData
+    events:
+      - http:
+          path: /postData
+          method: post
+          cors: true
+          private: true
+
+  getData:
+    handler: src/functions/dataService.getData
+    events:
+      - http:
+          path: /getData
+          method: post
+          cors: true
+          private: true
