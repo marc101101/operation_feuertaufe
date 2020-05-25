@@ -6,22 +6,16 @@ import * as uuid from "uuid";
 export class GetData {
   private db_connection: AWS.DynamoDB.DocumentClient;
 
-  constructor() {}
+  constructor() {
+    this.db_connection = new AWS.DynamoDB.DocumentClient();
+  }
 
   public async request(event) {
     const params = {
       TableName: process.env.TABLE_NAME,
     };
-    // fetch all todos from the database
-    this.db_connection.scan(params, (error, result) => {
-      // handle potential errors
-      if (error) {
-        logger.info(error);
-        throw "Couldn't fetch entries!";
-      }
+    const results = await this.db_connection.scan(params).promise();
 
-      // create a response
-      return JSON.stringify(result.Items);
-    });
+    return JSON.stringify(results);
   }
 }

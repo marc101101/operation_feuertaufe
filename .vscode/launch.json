@@ -9,7 +9,7 @@
       "type": "node",
       "request": "launch",
       "name": "Invoke Local - getData",
-      "program": "${workspaceFolder}/node_modules/serverless/bin/serverless",
+      "program": "${workspaceFolder}/backend/node_modules/serverless/bin/serverless",
       "args": ["invoke", "local", "-f", "getData"],
       "runtimeExecutable": "node"
     },
@@ -18,7 +18,7 @@
       "type": "node",
       "request": "launch",
       "name": "Invoke Local - postData",
-      "program": "${workspaceFolder}/node_modules/serverless/bin/serverless",
+      "program": "${workspaceFolder}/backend/node_modules/serverless/bin/serverless",
       "args": ["invoke", "local", "-f", "postData"],
       "runtimeExecutable": "node"
     }

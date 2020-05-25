@@ -15,7 +15,7 @@ provider:
 
   apiKeys:
     - name: operation-feuertaufe-${self:provider.stage}
-      value: ${self:custom.file.API_KEY}
+      value: "${ssm:/operation-feuertaufe/API_KEY}"
 
   iamRoleStatements:
     - Effect: Allow
@@ -27,12 +27,13 @@ provider:
         - "ssm:GetParameters"
         - "s3:GetObject"
         - "lambda:InvokeFunction"
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
+        - "dynamodb:DescribeTable"
+        - "dynamodb:Query"
+        - "dynamodb:Scan"
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
       Resource:
         - "*"
 
@@ -42,10 +43,9 @@ package:
 
 resources: # CloudFormation template syntax from here on.
   Resources:
-    usersTable:
+    dataTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: usersTable
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -80,6 +80,6 @@ functions:
     events:
       - http:
           path: /getData
-          method: post
+          method: get
           cors: true
           private: true

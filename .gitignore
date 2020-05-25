@@ -1,4 +1,5 @@
 .serverless/*
+backend/.serverless/*
 node_modules
 .DS_Store
 .webpack/*

@@ -1,32 +1,54 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-container fluid>
+    <transition name="router" mode="out-in">
+      <router-view class="view router-view"></router-view>
+    </transition>
+  </v-container>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+import router from "./router";
+
+export default Vue.extend({
+  name: "App",
+  router,
+  components: {},
+  data: () => ({}),
+
+  mounted() {
+    this.$store.dispatch("loadHospitals");
+  }
+});
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.toolbar {
+  z-index: 99;
+}
+.toolbar-logo {
+  height: 70%;
+}
+.toolbar-title {
+  font-family: canada-type-gibson, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  margin-left: 0.5rem;
 }
 
-#nav {
-  padding: 30px;
+.toolbar-title-regular {
+  color: #78849e;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.toolbar-title-red {
+  color: #eb413d;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.map-outter-style {
+  padding: 0px !important;
+}
+
+.container {
+  padding: 0px !important;
 }
 </style>

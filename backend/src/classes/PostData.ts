@@ -7,16 +7,13 @@ export class PostData {
   private db_connection: AWS.DynamoDB.DocumentClient;
 
   constructor() {
+    this.db_connection = new AWS.DynamoDB.DocumentClient();
   }
 
   public async request(event) {
     const timestamp = new Date().getTime();
+    logger.info(event.body);
     const data = JSON.parse(event.body);
-
-    if (typeof data.text !== "string") {
-      logger.info("Validation Failed");
-      throw "Couldn't create item.";
-    }
 
     const params = {
       TableName: process.env.TABLE_NAME,
@@ -29,16 +26,8 @@ export class PostData {
       },
     };
 
-    // write the todo to the database
-    this.db_connection.put(params, (error) => {
-      // handle potential errors
-      if (error) {
-       logger.info("Inserting into DB Failed");
-        throw error;
-      }
+    await this.db_connection.put(params).promise();
 
-      // create a response
-      return JSON.stringify(params.Item);
-    }
-}
+    return JSON.stringify(params);
+  }
 }

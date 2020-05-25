@@ -1,0 +1,13 @@
+{
+  "name": "operation-feuertaufe",
+  "version": "1.0.0",
+  "description": "Packaged externals for operation-feuertaufe",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "aws-sdk": "",
+    "pino": "^5.16.0",
+    "uuid": "",
+    "pino-pretty": "^2.6.1"
+  }
+}
