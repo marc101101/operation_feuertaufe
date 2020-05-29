@@ -1,0 +1,69 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img width="100" alt="Project Logo" src="../assets/img/logo.png" />
+  <span>Raspberry PI Sensor Data</span>
+</div>
+
+<div class="content" role="main">
+  <div class="card-container">
+    <div class="card">
+      <h1>{{ current_data.timestamp * 1000 | date: "dd.MM.yy HH:mm" }}</h1>
+      <p>Zuletzt upgedated</p>
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.dht_humidity }}</h1>
+      DHT22 - Feuchtigkeit
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.dht_temperature }}</h1>
+      DHT22 - Temperatur
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.idu_sound }}</h1>
+      IDU - Lautstärke
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.gas_lpg }}</h1>
+      GAS - LPG
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.gas_co }}</h1>
+      GAS - CO2
+    </div>
+
+    <div class="card">
+      <h1>{{ current_data.gas_smoke }}</h1>
+      GAS - Rauch
+    </div>
+  </div>
+</div>
+
+<div class="myChartDiv content">
+  <button
+    class="button"
+    *ngIf="show == false"
+    style="float: right;"
+    (click)="show = true"
+  >
+    Graph anzeigen
+  </button>
+  <button
+    class="button"
+    *ngIf="show == true"
+    style="float: right;"
+    (click)="show = false"
+  >
+    Graph nicht anzeigen
+  </button>
+
+  <div [hidden]="show">
+    <canvas #chartElementContainer></canvas>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
