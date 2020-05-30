@@ -565,7 +565,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 xAxes: [{
                   type: 'time',
                   time: {
-                    unit: 'second'
+                    unit: 'hours'
                   }
                 }]
               }

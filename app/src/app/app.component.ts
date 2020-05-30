@@ -121,7 +121,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             {
               type: 'time',
               time: {
-                unit: 'second',
+                unit: 'hours',
               },
             },
           ],

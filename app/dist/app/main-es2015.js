@@ -469,7 +469,7 @@ class AppComponent {
                         {
                             type: 'time',
                             time: {
-                                unit: 'second',
+                                unit: 'hours',
                             },
                         },
                     ],
