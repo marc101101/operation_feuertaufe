@@ -93,10 +93,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.current_data = data[0];
 
     this.history_data.datasets.forEach((history_data_object) => {
+      history_data_object.data = [];
       data.forEach((data_element) => {
         let to_add = {
           y: data_element[history_data_object.label],
-          x: data_element.timestamp,
+          x: data_element.timestamp * 1000,
         };
         history_data_object.data.push(to_add);
       });
