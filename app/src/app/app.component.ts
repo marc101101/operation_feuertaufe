@@ -69,7 +69,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     gas_smoke: 0,
   };
 
-  show = true;
+  show = false;
 
   constructor(public dataService: DataService) {}
 

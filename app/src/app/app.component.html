@@ -44,26 +44,24 @@
 </div>
 
 <div class="myChartDiv content">
-  <button
+  <!--button
     class="button"
     *ngIf="show == false"
     style="float: right;"
     (click)="show = true"
   >
     Graph anzeigen
-  </button>
-  <button
+  </!--button>
+  <button--
     class="button"
     *ngIf="show == true"
     style="float: right;"
     (click)="show = false"
   >
     Graph nicht anzeigen
-  </button>
+  </button-->
 
-  <div [hidden]="show">
-    <canvas #chartElementContainer></canvas>
-  </div>
+  <canvas #chartElementContainer></canvas>
 </div>
 
 <router-outlet></router-outlet>
