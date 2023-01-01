@@ -24,7 +24,7 @@
   "dependencies": {
     "@types/pino": "^5.15.5",
     "cheerio": "^1.0.0-rc.3",
-    "copy-webpack-plugin": "^5.1.1",
+    "copy-webpack-plugin": "^11.0.0",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "form-data": "^3.0.0",
     "moment": "^2.24.0",
@@ -35,10 +35,10 @@
     "proxy-agent": "^3.1.1",
     "request": "^2.88.2",
     "serverless-webpack": "^5.3.1",
-    "ts-loader": "^6.2.1",
+    "ts-loader": "^9.4.2",
     "typed-rest-client": "^1.7.1",
     "unirest": "^0.6.0",
-    "webpack": "^4.41.6",
+    "webpack": "^5.75.0",
     "webpack-node-externals": "^1.7.2"
   }
 }
